@@ -1,0 +1,55 @@
+.bixue-page{background:#f1f6f4}
+.bixue-page .section-page-banner{background:#0a243c}
+.bixue-intro{display:flex;align-items:end;justify-content:space-between;gap:35px;padding-top:62px;padding-bottom:38px}
+.bixue-intro h1{font-size:clamp(40px,4.2vw,62px);line-height:1.2;letter-spacing:-.05em;margin:14px 0 17px}
+.bixue-intro h1 em{font-style:normal;color:#18a68b}
+.bixue-intro p{max-width:730px;color:#5f7480;font-size:15px;margin:0}
+.bixue-model{display:flex;flex-direction:column;gap:6px;min-width:235px;padding:19px 22px;background:#0d3948;border-radius:11px;color:#fff;box-shadow:0 12px 30px rgba(13,57,72,.15)}
+.bixue-model span,.bixue-model small{font-size:11px;color:#bbd8d4}
+.bixue-model strong{font-size:21px}
+.bixue-workspace{display:grid;grid-template-columns:minmax(275px,350px) minmax(0,1fr);align-items:start;gap:22px;padding-bottom:18px}
+.bixue-side{display:grid;gap:17px}
+.bixue-card,.bixue-chat{background:#fff;border:1px solid #d9e7e1;border-radius:13px;box-shadow:0 10px 30px rgba(16,55,64,.05)}
+.bixue-card{padding:23px}
+.bixue-step{display:block;font:11px 'DM Mono',Consolas,monospace;letter-spacing:.13em;color:#159e86}
+.bixue-card h2,.bixue-chat-head h2{font-size:21px;margin:10px 0 18px}
+.bixue-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;padding:20px;text-align:center;border:2px dashed #9bd5c4;border-radius:10px;background:#f2faf6;cursor:pointer;transition:background .2s,border-color .2s}
+.bixue-drop:hover,.bixue-drop.dragging{background:#e5f6ed;border-color:#21a98c}
+.bixue-drop>span{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:#d9f1e7;color:#0f9279;font-size:25px}
+.bixue-drop strong{font-size:14px;color:#205749}
+.bixue-drop small{font-size:11px;color:#668179;line-height:1.6}
+#document-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.bixue-file-state{margin-top:14px;color:#607781;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.bixue-file-state.error{color:#b13f3f}
+.bixue-file-state.ready{color:#0d886e;font-weight:700}
+.bixue-clear{margin-top:10px;padding:0;border:0;background:none;color:#0b8c75;font-size:12px;text-decoration:underline}
+.bixue-note p{font-size:12px;color:#607781;line-height:1.8;margin:0 0 11px}
+.bixue-note p:last-child{margin:0}
+.bixue-chat{min-height:650px;display:flex;flex-direction:column;overflow:hidden}
+.bixue-chat-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:22px 25px 12px;border-bottom:1px solid #e4eeea}
+.bixue-chat-head h2{margin-bottom:0}
+#reset-chat{background:#edf6f1;color:#117a69;border:1px solid #cde8dc;padding:9px 14px;border-radius:6px;font-size:12px;font-weight:700}
+#reset-chat:hover{background:#daf0e5}
+.bixue-suggestions{display:flex;gap:8px;flex-wrap:wrap;padding:15px 25px;border-bottom:1px solid #e4eeea}
+.bixue-suggestions button{background:#f2f8f5;border:1px solid #d7e9df;color:#206b5c;padding:8px 11px;border-radius:100px;font-size:12px}
+.bixue-suggestions button:hover{background:#e2f4ea;border-color:#8ed4bc}
+.bixue-chat-log{display:flex;flex-direction:column;gap:18px;min-height:335px;max-height:58vh;overflow-y:auto;padding:25px;scrollbar-color:#c6ddd4 transparent}
+.bixue-message{max-width:min(100%,710px);align-self:flex-start}
+.bixue-message.user{align-self:flex-end}
+.bixue-message-label{font-size:11px;font-weight:800;color:#15977f;margin-bottom:6px}
+.bixue-message.user .bixue-message-label{text-align:right;color:#547483}
+.bixue-message-body{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f7f4;border:1px solid #e0ebe5;border-radius:11px;padding:14px 16px;font-size:13px;line-height:1.8;color:#2a4651}
+.bixue-message.user .bixue-message-body{background:#e7f5ed;border-color:#cce9d9}
+.bixue-composer{margin-top:auto;border-top:1px solid #e4eeea;padding:18px 25px 22px}
+.bixue-composer textarea{display:block;width:100%;min-height:95px;resize:vertical;border:1px solid #d4e4dc;border-radius:9px;background:#fbfdfc;padding:13px 15px;font:13px/1.7 'Noto Sans SC','Microsoft YaHei',sans-serif;color:#173e47;outline:none}
+.bixue-composer textarea:focus{border-color:#36b797;box-shadow:0 0 0 3px #dff4e9}
+.bixue-composer>div{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:11px}
+#chat-status{color:#6c8289;font-size:11px}
+#chat-status.error{color:#bd4141}
+#send-button{background:#0d3948;color:#fff;border:0;border-radius:6px;padding:11px 18px;font-size:12px;font-weight:800}
+#send-button:hover{background:#166274}
+#send-button:disabled{opacity:.5;cursor:wait}
+.bixue-disclaimer{padding:10px 0 54px;color:#71858a;font-size:11px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.bixue-intro{align-items:start;flex-direction:column}.bixue-workspace{grid-template-columns:1fr}.bixue-side{grid-template-columns:repeat(2,minmax(0,1fr))}.bixue-chat{min-height:600px}}
+@media(max-width:650px){.bixue-intro{padding-top:45px}.bixue-intro p{font-size:13px}.bixue-side{grid-template-columns:1fr}.bixue-card{padding:19px}.bixue-chat-head,.bixue-suggestions,.bixue-chat-log,.bixue-composer{padding-left:17px;padding-right:17px}.bixue-chat-log{max-height:55vh}.bixue-model{min-width:0;width:100%}}

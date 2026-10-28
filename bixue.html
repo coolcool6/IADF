@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a243c">
+  <meta name="description" content="智能驾驶基础课程比学平台：上传课程文档或项目书，使用开放权重模型解读与评阅。">
+  <title>智能驾驶基础课程比学平台</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="bixue.css">
+  <script src="script.js" defer></script>
+  <script src="https://js.puter.com/v2/" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.13.0/mammoth.browser.min.js" defer></script>
+  <script src="bixue.js" type="module"></script>
+</head>
+<body class="section-page bixue-page">
+  <a class="skip-link" href="#main">跳转到内容</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="返回课程首页"><img src="assets/tongji-logo.png" alt="同济大学校徽"><span><strong>智能驾驶基础</strong><small>同济大学汽车与能源学院 · 课程学习站</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+      <nav id="main-nav" class="main-nav" aria-label="主导航"><a href="overview.html">课程概览</a><a href="roadmap.html">学习路径</a><a href="modules.html">课程模块</a><a href="resources.html">学习资源</a><a href="learning.html">学情分析与资源推送</a><a href="research.html" aria-current="page">科研项目评鉴</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="section-page-banner"><div class="shell"><a href="research.html#evaluation">← 返回科研项目评鉴</a><span> / 比学平台</span></div></div>
+    <section class="bixue-intro shell" aria-labelledby="bixue-title">
+      <div><span class="section-index">COURSE AI STUDIO · QWEN OPEN-WEIGHT MODEL</span><h1 id="bixue-title">智能驾驶基础课程<br><em>比学平台</em></h1><p>上传课程文档或项目书，与开放权重模型讨论概念、梳理结构、对照评价标准。让每一次提问都回到你的文档和课程目标。</p></div>
+      <div class="bixue-model"><span>当前模型</span><strong>Qwen 3.5 27B</strong><small>通过 Puter.js 提供在线推理</small></div>
+    </section>
+    <section class="bixue-workspace shell" aria-label="文档解读与对话">
+      <aside class="bixue-side">
+        <div class="bixue-card">
+          <span class="bixue-step">01 / DOCUMENT</span><h2>上传解读文档</h2>
+          <label class="bixue-drop" id="document-drop" for="document-input"><span aria-hidden="true">⇧</span><strong>选择文件或拖放到这里</strong><small>PDF、DOCX、TXT、MD · 单个文件不超过 12 MB</small></label>
+          <input id="document-input" type="file" accept=".pdf,.docx,.txt,.md,.markdown,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown">
+          <div id="document-state" class="bixue-file-state" role="status" aria-live="polite">尚未选择文档。也可以直接提问课程相关问题。</div>
+          <button id="clear-document" class="bixue-clear" type="button" hidden>移除当前文档</button>
+        </div>
+        <div class="bixue-card bixue-note"><span class="bixue-step">02 / PRIVACY & USAGE</span><h2>使用说明</h2><p>文档先在浏览器中提取文字；提问时，提取出的文字和你的问题会发送至 Puter 的模型服务。原文件不会由本站保存。</p><p>首次提问需要登录 Puter。模型使用量计入登录者账户，可能涉及额度或费用；请勿上传涉密材料。</p><p>扫描版 PDF 暂无 OCR；如未能提取文字，请先转为可复制文字的 PDF 或 DOCX。</p></div>
+      </aside>
+      <div class="bixue-chat">
+        <div class="bixue-chat-head"><div><span class="bixue-step">03 / LEARN & COMPARE</span><h2>文档对话</h2></div><button id="reset-chat" type="button">新建对话</button></div>
+        <div class="bixue-suggestions" aria-label="快捷提问"><button type="button" data-prompt="请先概括这份文档的核心内容、章节结构和主要结论；如果没有上传文档，请说明智能驾驶基础课程的五个核心模块。">文档概览</button><button type="button" data-prompt="请依据创新性30%、理论深度25%、实用性25%、完整性20%四个维度评阅这份项目书。逐项说明有文档依据的优点、欠缺和修改建议；证据不足时明确写出，不要虚构分数。">项目书评阅</button><button type="button" data-prompt="请根据这份文档提出三个适合智能驾驶基础课程学习或答辩的追问，并说明每个问题考查什么。">生成追问</button></div>
+        <div id="chat-log" class="bixue-chat-log" role="log" aria-live="polite"><div class="bixue-message assistant"><div class="bixue-message-label">比学平台</div><div class="bixue-message-body">你好！上传文档后，我可以帮你梳理内容、对照项目书评价维度给出修改建议，也可以围绕感知、决策、规划与控制答疑。请选择文件，或直接输入问题。</div></div></div>
+        <form id="chat-form" class="bixue-composer"><label class="sr-only" for="chat-input">输入问题</label><textarea id="chat-input" rows="3" maxlength="3000" placeholder="例如：这份项目书的技术路线还缺少哪些关键环节？"></textarea><div><span id="chat-status" role="status" aria-live="polite">准备就绪</span><button id="send-button" type="submit">发送问题 ↗</button></div></form>
+      </div>
+    </section>
+    <div class="bixue-disclaimer shell">AI 解读仅供学习参考；项目书评分和最终评价以授课教师为准。</div>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><div><strong>智能驾驶基础</strong><span>同济大学汽车与能源学院 · 课程学习站</span></div><a href="research.html#evaluation">返回科研项目评鉴 ↑</a></div></footer>
+</body>
+</html>

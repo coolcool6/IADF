@@ -32,19 +32,20 @@
     <section class="bixue-workspace shell" aria-label="文档解读与对话">
       <aside class="bixue-side">
         <div class="bixue-card">
-          <span class="bixue-step">01 / DOCUMENT</span><h2>上传解读文档</h2>
-          <label class="bixue-drop" id="document-drop" for="document-input"><span aria-hidden="true">⇧</span><strong>选择文件或拖放到这里</strong><small>PDF、DOCX、TXT、MD · 单个文件不超过 12 MB</small></label>
-          <input id="document-input" type="file" accept=".pdf,.docx,.txt,.md,.markdown,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown">
-          <div id="document-state" class="bixue-file-state" role="status" aria-live="polite">尚未选择文档。也可以直接提问课程相关问题。</div>
-          <button id="clear-document" class="bixue-clear" type="button" hidden>移除当前文档</button>
+          <span class="bixue-step">01 / DOCUMENTS</span><h2>上传解读文档</h2>
+          <label class="bixue-drop" id="document-drop" for="document-input"><span aria-hidden="true">⇧</span><strong>选择多份文件或拖放到这里</strong><small>PDF、DOCX、TXT、MD · 最多 5 份 · 每份不超过 12 MB</small></label>
+          <input id="document-input" type="file" multiple accept=".pdf,.docx,.txt,.md,.markdown,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown">
+          <div id="document-state" class="bixue-file-state" role="status" aria-live="polite">尚未选择文档。可一次选择多份，也可分次追加。</div>
+          <ul id="document-list" class="bixue-document-list" aria-label="已选择的文档"></ul>
+          <button id="clear-document" class="bixue-clear" type="button" hidden>移除全部文档</button>
         </div>
-        <div class="bixue-card bixue-note"><span class="bixue-step">02 / PRIVACY & USAGE</span><h2>使用说明</h2><p>文档先在浏览器中提取文字；提问时，提取出的文字和你的问题会发送至 Puter 的模型服务。原文件不会由本站保存。</p><p>首次提问需要登录 Puter。模型使用量计入登录者账户，可能涉及额度或费用；请勿上传涉密材料。</p><p>扫描版 PDF 暂无 OCR；如未能提取文字，请先转为可复制文字的 PDF 或 DOCX。</p></div>
+        <div class="bixue-card bixue-note"><span class="bixue-step">02 / PRIVACY & USAGE</span><h2>使用说明</h2><p>文档先在浏览器中提取文字；提问时，已载入文档的文字和你的问题会发送至 Puter 的模型服务。原文件不会由本站保存。</p><p>每份最多读取前 3 万字；多文档提问时会为各文档分配文字额度，确保每份都进入分析。首次提问需要登录 Puter，使用量计入登录者账户。</p><p>请勿上传涉密材料。扫描版 PDF 暂无 OCR；如未能提取文字，请先转为可复制文字的 PDF 或 DOCX。</p></div>
       </aside>
       <div class="bixue-chat">
         <div class="bixue-chat-head"><div><span class="bixue-step">03 / LEARN & COMPARE</span><h2>文档对话</h2></div><button id="reset-chat" type="button">新建对话</button></div>
-        <div class="bixue-suggestions" aria-label="快捷提问"><button type="button" data-prompt="请先概括这份文档的核心内容、章节结构和主要结论；如果没有上传文档，请说明智能驾驶基础课程的五个核心模块。">文档概览</button><button type="button" data-prompt="请依据创新性30%、理论深度25%、实用性25%、完整性20%四个维度评阅这份项目书。逐项说明有文档依据的优点、欠缺和修改建议；证据不足时明确写出，不要虚构分数。">项目书评阅</button><button type="button" data-prompt="请根据这份文档提出三个适合智能驾驶基础课程学习或答辩的追问，并说明每个问题考查什么。">生成追问</button></div>
-        <div id="chat-log" class="bixue-chat-log" role="log" aria-live="polite"><div class="bixue-message assistant"><div class="bixue-message-label">比学平台</div><div class="bixue-message-body">你好！上传文档后，我可以帮你梳理内容、对照项目书评价维度给出修改建议，也可以围绕感知、决策、规划与控制答疑。请选择文件，或直接输入问题。</div></div></div>
-        <form id="chat-form" class="bixue-composer"><label class="sr-only" for="chat-input">输入问题</label><textarea id="chat-input" rows="3" maxlength="3000" placeholder="例如：这份项目书的技术路线还缺少哪些关键环节？"></textarea><div><span id="chat-status" role="status" aria-live="polite">准备就绪</span><button id="send-button" type="submit">发送问题 ↗</button></div></form>
+        <div class="bixue-suggestions" aria-label="快捷提问"><button type="button" data-prompt="请分别概括已上传的每份文档的核心内容、章节结构和主要结论；如果没有上传文档，请说明智能驾驶基础课程的五个核心模块。">文档概览</button><button id="compare-documents" type="button" disabled title="至少载入两份文档后可用" data-prompt="请对已上传的文档进行对比分析：先列出每份文档的研究问题、技术路线、评价指标和安全考虑，再归纳共同点、关键差异、各自优点与不足，以及可以互相借鉴的做法。请按文档名称标注依据，PDF 尽量注明页码；没有依据时明确说明。">对比分析</button><button type="button" data-prompt="请依据创新性30%、理论深度25%、实用性25%、完整性20%四个维度，分别评阅已上传的项目书，并比较它们的优势与不足。逐项说明文档依据和修改建议；证据不足时不要虚构分数。">项目书评阅</button><button type="button" data-prompt="请根据已上传的文档提出三个适合智能驾驶基础课程学习或答辩的追问，并说明每个问题考查什么。">生成追问</button></div>
+        <div id="chat-log" class="bixue-chat-log" role="log" aria-live="polite"><div class="bixue-message assistant"><div class="bixue-message-label">比学平台</div><div class="bixue-message-body">你好！上传多份文档后，我可以对比研究问题、技术路线和评价指标，也可以逐份评阅项目书。请选择文件，或直接输入课程问题。</div></div></div>
+        <form id="chat-form" class="bixue-composer"><label class="sr-only" for="chat-input">输入问题</label><textarea id="chat-input" rows="3" maxlength="3000" placeholder="例如：请比较这两份项目书的技术路线和评价指标。"></textarea><div><span id="chat-status" role="status" aria-live="polite">准备就绪</span><button id="send-button" type="submit">发送问题 ↗</button></div></form>
       </div>
     </section>
     <div class="bixue-disclaimer shell">AI 解读仅供学习参考；项目书评分和最终评价以授课教师为准。</div>

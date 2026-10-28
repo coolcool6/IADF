@@ -10,6 +10,10 @@ const chatLog = document.querySelector('#chat-log');
 const chatStatus = document.querySelector('#chat-status');
 const sendButton = document.querySelector('#send-button');
 const resetButton = document.querySelector('#reset-chat');
+const sideNewButton = document.querySelector('#new-session-side');
+const sessionList = document.querySelector('#session-list');
+const activeSessionTitle = document.querySelector('#active-session-title');
+const historyStorageStatus = document.querySelector('#history-storage-status');
 
 const MAX_DOCUMENTS = 5;
 const MAX_BYTES = 12 * 1024 * 1024;
@@ -17,6 +21,12 @@ const MAX_CHARS_PER_DOC = 30000;
 const MAX_CONTEXT_CHARS = 60000;
 const MAX_PDF_PAGES = 60;
 const MODEL = 'qwen/qwen3.5-27b';
+const STORAGE_KEY = 'smart-driving-bixue-sessions-v1';
+const ACTIVE_KEY = 'smart-driving-bixue-active-v1';
+let sessions = loadSessions();
+if (!sessions.length) sessions = [makeSession()];
+let activeSessionId = sessions.some(item => item.id === readActiveId()) ? readActiveId() : sessions[0].id;
+const documentCache = new Map();
 let documents = [];
 let nextDocumentId = 1;
 let busy = false;
@@ -24,6 +34,61 @@ let history = [];
 
 const readyDocuments = () => documents.filter(item => item.status === 'ready');
 const hasPendingDocuments = () => documents.some(item => item.status === 'loading');
+const getActiveSession = () => sessions.find(item => item.id === activeSessionId);
+const missingDocuments = () => (getActiveSession()?.docNames || []).filter(name => !readyDocuments().some(item => item.name === name));
+
+function makeSession() {
+  return { id: globalThis.crypto?.randomUUID?.() || `session-${Date.now()}-${Math.random().toString(36).slice(2)}`, title: '新会话', createdAt: Date.now(), updatedAt: Date.now(), docNames: [], messages: [], history: [] };
+}
+
+function loadSessions() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    if (!Array.isArray(stored)) return [];
+    return stored.filter(item => item && typeof item.id === 'string' && Array.isArray(item.messages))
+      .map(item => ({ id: item.id, title: String(item.title || '历史会话'), createdAt: Number(item.createdAt) || Date.now(), updatedAt: Number(item.updatedAt) || Date.now(), docNames: Array.isArray(item.docNames) ? item.docNames.filter(name => typeof name === 'string') : [], messages: item.messages.filter(message => message && ['user', 'assistant'].includes(message.role) && typeof message.content === 'string'), history: Array.isArray(item.history) ? item.history.filter(message => message && ['user', 'assistant'].includes(message.role) && typeof message.content === 'string') : [] }));
+  } catch { return []; }
+}
+
+function readActiveId() {
+  try { return localStorage.getItem(ACTIVE_KEY); } catch { return null; }
+}
+
+function persistSessions() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+    localStorage.setItem(ACTIVE_KEY, activeSessionId);
+    historyStorageStatus.textContent = '记录仅保存在当前浏览器；刷新后可查看。文档原文不会保存。';
+    historyStorageStatus.classList.remove('error');
+  } catch {
+    historyStorageStatus.textContent = '浏览器存储空间不足或已禁用，当前记录可能无法在刷新后恢复。';
+    historyStorageStatus.classList.add('error');
+  }
+}
+
+function touchSession() {
+  getActiveSession().updatedAt = Date.now();
+  persistSessions();
+  renderSessionList();
+}
+
+function renderSessionList() {
+  sessionList.replaceChildren();
+  const sorted = [...sessions].sort((a, b) => b.updatedAt - a.updatedAt);
+  for (const session of sorted) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-current', String(session.id === activeSessionId));
+    button.disabled = busy || hasPendingDocuments();
+    const title = document.createElement('strong');
+    title.textContent = session.title;
+    const meta = document.createElement('small');
+    meta.textContent = `${new Date(session.updatedAt).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })} · ${session.messages.filter(message => message.role === 'user').length} 轮提问${session.docNames.length ? ` · ${session.docNames.length} 份文档` : ''}`;
+    button.append(title, meta);
+    button.addEventListener('click', () => switchSession(session.id));
+    sessionList.append(button);
+  }
+}
 
 function setFileState(message, kind = '') {
   fileState.textContent = message;
@@ -37,13 +102,17 @@ function setChatStatus(message, kind = '') {
 
 function updateControls() {
   const pending = hasPendingDocuments();
-  sendButton.disabled = busy || pending;
+  const missing = missingDocuments();
+  sendButton.disabled = busy || pending || missing.length > 0;
   fileInput.disabled = busy;
-  clearDocumentButton.hidden = documents.length === 0;
+  clearDocumentButton.hidden = documents.length === 0 && getActiveSession().docNames.length === 0;
   clearDocumentButton.disabled = busy;
-  compareButton.disabled = busy || pending || readyDocuments().length < 2;
+  compareButton.disabled = busy || pending || missing.length > 0 || readyDocuments().length < 2;
   compareButton.title = compareButton.disabled ? '至少载入两份文档后可用' : '填写多文档对比分析问题';
+  resetButton.disabled = busy || pending;
+  sideNewButton.disabled = busy || pending;
   documentList.querySelectorAll('button').forEach(button => { button.disabled = busy; });
+  renderSessionList();
 }
 
 function renderDocuments(notice = '') {
@@ -72,9 +141,12 @@ function renderDocuments(notice = '') {
   const ready = readyDocuments().length;
   const pending = documents.filter(item => item.status === 'loading').length;
   const failed = documents.filter(item => item.status === 'error').length;
+  const missing = missingDocuments();
   const summary = documents.length
-    ? `已载入 ${ready} 份${pending ? `，正在解析 ${pending} 份` : ''}${failed ? `，失败 ${failed} 份` : ''}。可继续添加，最多 ${MAX_DOCUMENTS} 份。`
-    : '尚未选择文档。可一次选择多份，也可分次追加。';
+    ? `已载入 ${ready} 份${pending ? `，正在解析 ${pending} 份` : ''}${failed ? `，失败 ${failed} 份` : ''}。${missing.length ? `历史会话还需重新上传：${missing.join('、')}。` : ''}可继续添加，最多 ${MAX_DOCUMENTS} 份。`
+    : missing.length
+      ? `此历史会话曾使用 ${missing.length} 份文档：${missing.join('、')}。请重新上传这些文档，或新建会话。`
+      : '尚未选择文档。可一次选择多份，也可分次追加。';
   setFileState(notice ? `${notice} ${summary}` : summary, failed || notice ? 'error' : ready ? 'ready' : '');
   updateControls();
 }
@@ -94,18 +166,63 @@ function addMessage(role, content) {
   return body;
 }
 
-function resetConversation() {
-  history = [];
-  chatInput.value = '';
+function renderConversation() {
   chatLog.replaceChildren();
+  const session = getActiveSession();
+  activeSessionTitle.textContent = session.title === '新会话' ? '文档对话' : session.title;
+  if (session.messages.length) {
+    for (const message of session.messages) addMessage(message.role, message.content);
+    setChatStatus(missingDocuments().length ? '请重新上传此会话的文档，才能继续提问' : hasPendingDocuments() ? '正在解析文档，完成后即可提问' : '准备就绪');
+    return;
+  }
   const ready = readyDocuments();
   const message = ready.length >= 2
     ? `已载入 ${ready.length} 份文档：${ready.map(item => `《${item.name}》`).join('、')}。现在可以点击“对比分析”，也可以提出具体的比较问题。`
     : ready.length === 1
       ? `已载入《${ready[0].name}》。你可以继续添加文档进行对比，或先解读这份文档。`
-      : '你好！上传多份文档后，我可以对比研究问题、技术路线和评价指标，也可以逐份评阅项目书。请选择文件，或直接输入课程问题。';
+      : missingDocuments().length
+        ? '这是之前的会话。对话记录已保留；文档原文未保存在浏览器中，请重新上传对应文档后继续提问。'
+        : '你好！上传多份文档后，我可以对比研究问题、技术路线和评价指标，也可以逐份评阅项目书。请选择文件，或直接输入课程问题。';
   addMessage('assistant', message);
-  setChatStatus(hasPendingDocuments() ? '正在解析文档，完成后即可提问' : '准备就绪');
+  setChatStatus(missingDocuments().length ? '请重新上传此会话的文档' : hasPendingDocuments() ? '正在解析文档，完成后即可提问' : '准备就绪');
+}
+
+function refreshConversationAfterDocuments() {
+  if (getActiveSession().messages.length === 0) renderConversation();
+  else setChatStatus(missingDocuments().length ? '请重新上传此会话的文档，才能继续提问' : hasPendingDocuments() ? '正在解析文档，完成后即可提问' : '准备就绪');
+}
+
+function recordMessage(role, content) {
+  getActiveSession().messages.push({ role, content });
+  touchSession();
+}
+
+function switchSession(id) {
+  if (busy || hasPendingDocuments() || id === activeSessionId) return;
+  documentCache.set(activeSessionId, documents);
+  activeSessionId = id;
+  documents = documentCache.get(id) || [];
+  history = getActiveSession().history;
+  chatInput.value = '';
+  persistSessions();
+  renderDocuments();
+  renderConversation();
+}
+
+function createSession() {
+  if (busy || hasPendingDocuments()) return;
+  const current = getActiveSession();
+  if (current.messages.length === 0 && current.docNames.length === 0 && documents.length === 0) return;
+  documentCache.set(activeSessionId, documents);
+  const session = makeSession();
+  sessions.unshift(session);
+  activeSessionId = session.id;
+  documents = [];
+  history = session.history;
+  chatInput.value = '';
+  persistSessions();
+  renderDocuments();
+  renderConversation();
 }
 
 async function extractPdf(file) {
@@ -159,13 +276,17 @@ async function parseDocument(item, file) {
     item.detail = result.detail;
     item.clipped = original.length > MAX_CHARS_PER_DOC;
     item.status = 'ready';
+    const session = getActiveSession();
+    if (!session.docNames.includes(item.name)) session.docNames.push(item.name);
+    if (session.title === '新会话' && session.messages.length === 0) session.title = `文档：${item.name.slice(0, 20)}`;
+    touchSession();
   } catch (error) {
     if (!documents.includes(item)) return;
     item.status = 'error';
     item.error = error?.message || '文档解析失败。';
   }
   renderDocuments();
-  resetConversation();
+  refreshConversationAfterDocuments();
 }
 
 function addDocuments(files) {
@@ -188,15 +309,24 @@ function addDocuments(files) {
     added.push([item, file]);
   }
   renderDocuments(skipped ? `有 ${skipped} 份文件未添加（重复或超过 ${MAX_DOCUMENTS} 份上限）。` : '');
-  if (added.length) resetConversation();
+  if (added.length) refreshConversationAfterDocuments();
   for (const [item, file] of added) void parseDocument(item, file);
 }
 
 function removeDocument(id) {
   if (busy) return;
+  const removed = documents.find(item => item.id === id);
   documents = documents.filter(item => item.id !== id);
+  documentCache.set(activeSessionId, documents);
+  if (removed && !documents.some(item => item.name === removed.name)) {
+    const session = getActiveSession();
+    session.docNames = session.docNames.filter(name => name !== removed.name);
+    session.history = [];
+    history = session.history;
+    touchSession();
+  }
   renderDocuments();
-  resetConversation();
+  refreshConversationAfterDocuments();
 }
 
 function answerText(response) {
@@ -246,11 +376,18 @@ dropZone.addEventListener('drop', event => {
 clearDocumentButton.addEventListener('click', () => {
   if (busy) return;
   documents = [];
+  documentCache.set(activeSessionId, documents);
+  const session = getActiveSession();
+  session.docNames = [];
+  session.history = [];
+  history = session.history;
+  touchSession();
   fileInput.value = '';
   renderDocuments();
-  resetConversation();
+  refreshConversationAfterDocuments();
 });
-resetButton.addEventListener('click', () => { if (!busy) resetConversation(); });
+resetButton.addEventListener('click', createSession);
+sideNewButton.addEventListener('click', createSession);
 document.querySelectorAll('[data-prompt]').forEach(button => {
   button.addEventListener('click', () => {
     chatInput.value = button.dataset.prompt;
@@ -271,9 +408,19 @@ chatForm.addEventListener('submit', async event => {
     setChatStatus('请等待文档解析完成后再提问', 'error');
     return;
   }
+  if (missingDocuments().length) {
+    setChatStatus('请重新上传历史会话的文档，或新建会话', 'error');
+    return;
+  }
   busy = true;
   updateControls();
   chatInput.value = '';
+  const session = getActiveSession();
+  if (session.messages.length === 0 && (session.title === '新会话' || session.title.startsWith('文档：'))) {
+    session.title = question.slice(0, 24);
+    activeSessionTitle.textContent = session.title;
+  }
+  recordMessage('user', question);
   addMessage('user', question);
   const answerBody = addMessage('assistant', '正在思考，请稍候…');
   setChatStatus('正在连接模型，首次使用可能需要登录 Puter');
@@ -281,9 +428,11 @@ chatForm.addEventListener('submit', async event => {
     const answer = await askModel(question);
     answerBody.textContent = answer;
     history.push({ role: 'user', content: question }, { role: 'assistant', content: answer });
+    recordMessage('assistant', answer);
     setChatStatus('回答已生成');
   } catch (error) {
     answerBody.textContent = `暂时无法生成回答：${error?.message || '未知错误'}。你可以重试。`;
+    recordMessage('assistant', answerBody.textContent);
     setChatStatus('请求失败，请重试', 'error');
     chatInput.value = question;
   } finally {
@@ -292,3 +441,8 @@ chatForm.addEventListener('submit', async event => {
     chatLog.scrollTop = chatLog.scrollHeight;
   }
 });
+
+history = getActiveSession().history;
+renderDocuments();
+renderConversation();
+persistSessions();

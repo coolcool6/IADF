@@ -11,6 +11,20 @@
 .bixue-side{display:grid;gap:17px}
 .bixue-card,.bixue-chat{background:#fff;border:1px solid #d9e7e1;border-radius:13px;box-shadow:0 10px 30px rgba(16,55,64,.05)}
 .bixue-card{padding:23px}
+.bixue-history-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bixue-history-head h2{margin:8px 0 0}
+#new-session-side{flex:0 0 auto;background:#e8f5ee;border:1px solid #c7e8d8;border-radius:6px;color:#117a69;padding:7px 10px;font-size:11px;font-weight:700}
+#new-session-side:hover{background:#d8efdf}
+#new-session-side:disabled{opacity:.5;cursor:wait}
+.bixue-session-list{display:grid;gap:7px;max-height:270px;overflow-y:auto;margin-top:18px}
+.bixue-session-list button{width:100%;text-align:left;border:1px solid #dceae3;border-radius:7px;background:#f8fbf9;padding:10px 11px;color:#2c5154}
+.bixue-session-list button:hover{border-color:#88cfb9;background:#f0f8f3}
+.bixue-session-list button[aria-current="true"]{border-color:#45b59b;background:#e6f5eb;box-shadow:inset 3px 0 #1caa8c}
+.bixue-session-list button:disabled{cursor:wait}
+.bixue-session-list strong{display:block;font-size:12px;line-height:1.45;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.bixue-session-list small{display:block;margin-top:3px;font-size:10px;color:#6e8685}
+.bixue-history-note{font-size:11px;color:#6c8381;line-height:1.6;margin:14px 0 0}
+.bixue-history-note.error{color:#b13f3f}
 .bixue-step{display:block;font:11px 'DM Mono',Consolas,monospace;letter-spacing:.13em;color:#159e86}
 .bixue-card h2,.bixue-chat-head h2{font-size:21px;margin:10px 0 18px}
 .bixue-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;padding:20px;text-align:center;border:2px dashed #9bd5c4;border-radius:10px;background:#f2faf6;cursor:pointer;transition:background .2s,border-color .2s}
@@ -41,6 +55,7 @@
 .bixue-chat-head h2{margin-bottom:0}
 #reset-chat{background:#edf6f1;color:#117a69;border:1px solid #cde8dc;padding:9px 14px;border-radius:6px;font-size:12px;font-weight:700}
 #reset-chat:hover{background:#daf0e5}
+#reset-chat:disabled{opacity:.5;cursor:wait}
 .bixue-suggestions{display:flex;gap:8px;flex-wrap:wrap;padding:15px 25px;border-bottom:1px solid #e4eeea}
 .bixue-suggestions button{background:#f2f8f5;border:1px solid #d7e9df;color:#206b5c;padding:8px 11px;border-radius:100px;font-size:12px}
 .bixue-suggestions button:hover{background:#e2f4ea;border-color:#8ed4bc}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a243c">
+  <meta name="description" content="同济大学《智能驾驶基础》课程学习站：从系统认知到感知定位、决策规划、运动控制与安全实践。">
+  <title>智能驾驶基础 · 课程学习站</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#main">跳转到课程内容</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="智能驾驶基础，返回首页">
+        <img src="assets/tongji-logo.png" alt="同济大学校徽">
+        <span><strong>智能驾驶基础</strong><small>同济大学汽车与能源学院 · 课程学习站</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+      <nav id="main-nav" class="main-nav" aria-label="主导航"><a href="overview.html">课程概览</a><a href="roadmap.html">学习路径</a><a href="modules.html">课程模块</a><a href="resources.html">学习资源</a><a href="learning.html">学情分析与资源推送</a><a href="research.html">科研项目评鉴</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> TONGJI UNIVERSITY · SCHOOL OF AUTOMOTIVE STUDIES</div>
+          <div class="course-tag">车辆工程 · 专业核心必修课</div>
+          <h1 id="hero-title">智能驾驶基础<span class="hero-title-sub">贯通感知、决策、规划与控制</span></h1>
+          <p class="hero-lead">面向车辆工程本科生，从系统架构和核心算法出发，结合典型交通场景，建立智能驾驶的工程分析与实践能力。</p>
+          <div class="hero-actions"><a class="button button-primary" href="modules/01-system.html">开始学习 <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="overview.html">了解课程 <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-facts" aria-label="课程基本信息"><div><strong>34</strong><span>总学时</span></div><div><strong>2</strong><span>学分</span></div><div><strong>5</strong><span>递进模块</span></div></div>
+        </div>
+        <div class="hero-visual" role="img" aria-label="智能驾驶汽车在道路上识别行人、车辆与路线的示意图">
+          <div class="visual-topline"><span class="pulse"></span> SYSTEM ONLINE <span>01 / 05</span></div>
+          <svg class="driving-scene" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#193e58"/><stop offset="1" stop-color="#091e31"/></linearGradient><linearGradient id="car" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9f2f0"/><stop offset="1" stop-color="#7dc5c5"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="7"/></filter></defs>
+            <path d="M97 460 227 0h146l130 460" fill="url(#road)" stroke="#32617a" stroke-width="2"/>
+            <path d="M300 0v95m0 34v94m0 34v93m0 34v78" stroke="#7093a5" stroke-width="3" stroke-dasharray="18 18" opacity=".6"/>
+            <path d="M206 96 156 458M394 96l50 362" stroke="#638fa4" stroke-width="3" stroke-dasharray="11 13" opacity=".42"/>
+            <path d="M300 356Q249 313 217 252Q193 202 201 128" fill="none" stroke="#57e1c7" stroke-width="20" opacity=".18" filter="url(#glow)"/>
+            <path d="M300 356Q249 313 217 252Q193 202 201 128" fill="none" stroke="#77efd2" stroke-width="3" stroke-dasharray="8 8"/>
+            <g opacity=".8"><path d="M168 105 195 65l30 10-21 52z" fill="none" stroke="#53d6bd" stroke-width="2"/><path d="M401 221 436 202l34 16-20 38-47-6z" fill="none" stroke="#e3ac67" stroke-width="2"/><circle cx="188" cy="115" r="50" fill="none" stroke="#53d6bd" stroke-width="1" stroke-dasharray="4 8" opacity=".5"/></g>
+            <g transform="translate(247 284)"><ellipse cx="53" cy="100" rx="65" ry="15" fill="#020d19" opacity=".5"/><path d="M21 13Q53 0 85 13l17 28-3 57Q54 113 7 98L4 41z" fill="url(#car)" stroke="#d7f5ec" stroke-width="3"/><path d="M25 18Q54 6 81 18l10 24Q54 47 14 42z" fill="#163c54"/><path d="M15 54h79v25H15z" fill="#194c61"/><path d="M9 87q44 14 89 0" fill="none" stroke="#e6fbef" stroke-width="4"/><path d="M6 48h11m78 0h9" stroke="#f8d391" stroke-width="6"/></g>
+            <g fill="#63e0ca" font-size="11" font-family="monospace"><text x="83" y="42">OBJECT DETECTED</text><text x="414" y="184">OBSTACLE</text><text x="335" y="425">PATH TRACKING</text></g>
+            <path d="M193 72H83v21m365 112h79v21M372 418h112" fill="none" stroke="#63e0ca" stroke-width="1" opacity=".7"/>
+          </svg>
+          <div class="visual-footer"><span>PERCEPTION</span><span>DECISION</span><span>PLANNING</span><span>CONTROL</span></div>
+        </div>
+      </div>
+      <div class="hero-bottom shell"><div class="college-logo-box"><img src="assets/college-logo.png" alt="同济大学汽车与能源学院院徽"></div><p>地址：上海市嘉定区曹安公路4800号宁远馆　邮编：201804<br>Copyright © 2023同济大学汽车学院 版权所有</p></div>
+    </section>
+
+  </main>
+<!-- 智能驾驶基础课程 AI 智能体 -->
+<script src="https://agent.tongji.edu.cn/resources/product/llm/public/sdk/embedLite.js"></script>
+<script>
+  new HiagentWebSDK.WebLiteClient({
+    appKey: "dbgts17710990jnp4nag",
+    baseUrl: "https://agent.tongji.edu.cn",
+    variables: {},
+  });
+</script>
+</body>
+</html>
+
+
+
+

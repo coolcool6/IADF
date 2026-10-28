@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a243c">
+  <meta name="description" content="智能驾驶基础课程资源：书籍、论文、代码、推荐视频、最新资讯与领域专家">
+  <title>学习资源 · 智能驾驶基础</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="section-page resource-page">
+<a class="skip-link" href="#main">跳转到内容</a>
+<header class="site-header"><div class="shell header-inner">
+  <a class="brand" href="index.html" aria-label="智能驾驶基础，返回首页"><img src="assets/tongji-logo.png" alt="同济大学校徽"><span><strong>智能驾驶基础</strong><small>同济大学汽车与能源学院 · 课程学习站</small></span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+  <nav id="main-nav" class="main-nav" aria-label="主导航"><a href="overview.html">课程概览</a><a href="roadmap.html">学习路径</a><a href="modules.html">课程模块</a><a href="resources.html" aria-current="page">学习资源</a><a href="learning.html">学情分析与资源推送</a><a href="research.html">科研项目评鉴</a></nav>
+</div></header>
+<main id="main">
+  <div class="section-page-banner"><div class="shell"><a href="index.html">← 返回课程首页</a><span> / 学习资源</span></div></div>
+  <section class="resource-hero"><div class="shell">
+    <span class="section-index">CURATED LEARNING LIBRARY</span>
+    <h1>学习资源<span>从基础阅读到前沿探索</span></h1>
+    <p>围绕智能驾驶系统、环境感知、决策规划、运动控制与综合安全，整理可直接访问的教材、论文、开源代码、视频课程、动态资讯及专家主页。</p>
+    <nav class="resource-tabs" aria-label="资源分类">
+      <a href="#books">书籍</a><a href="#papers">论文</a><a href="#code">代码</a><a href="#videos">推荐视频</a><a href="#news">最新资讯</a><a href="#experts">智能驾驶领域专家汇聚</a>
+    </nav>
+  </div></section>
+  <div class="shell resource-library">
+    <section class="library-section" id="books">
+      <div class="library-heading"><div><span class="section-index">01 / BOOKS</span><h2>书籍</h2></div><p>从系统架构、传感器到规划与控制，先建立完整知识框架。链接直达出版社图书详情与目录。</p></div>
+      <div class="library-grid">
+        <a class="library-card" href="https://www.tup.tsinghua.edu.cn/bookscenter/book_09165001.html" target="_blank" rel="noopener noreferrer"><span class="library-kind">教材 · 系统入门</span><h3>智能网联汽车</h3><p>李克强、王建强、许庆。覆盖技术体系、环境感知、地图定位、决策控制与测试评价。</p><span class="library-meta">清华大学出版社 · 2022</span><span class="library-open">查看图书 ↗</span></a>
+        <a class="library-card" href="https://www.tup.tsinghua.edu.cn/booksCenter/book_09660501.html" target="_blank" rel="noopener noreferrer"><span class="library-kind">教材 · 综合导论</span><h3>智能网联汽车导论</h3><p>李骏、李克强、王云鹏。适合从车辆、交通与信息系统的交叉视角学习。</p><span class="library-meta">清华大学出版社 · 2022</span><span class="library-open">查看图书 ↗</span></a>
+        <a class="library-card" href="https://www.tup.tsinghua.edu.cn/bookscenter/book_08301201.html" target="_blank" rel="noopener noreferrer"><span class="library-kind">教材 · 模块二</span><h3>自动驾驶汽车环境感知</h3><p>聚焦相机、雷达、融合与环境理解，可配合“环境感知与定位建图”模块阅读。</p><span class="library-meta">清华大学出版社 · 2020</span><span class="library-open">查看图书 ↗</span></a>
+        <a class="library-card" href="https://www.tup.tsinghua.edu.cn/bookscenter/book_09100101.html" target="_blank" rel="noopener noreferrer"><span class="library-kind">教材 · 工程应用</span><h3>智能网联汽车技术</h3><p>包含通信、定位导航、感知规划、操作系统与仿真测试等内容。</p><span class="library-meta">清华大学出版社 · 2023</span><span class="library-open">查看图书 ↗</span></a>
+      </div>
+    </section>
+    <section class="library-section" id="papers">
+      <div class="library-heading"><div><span class="section-index">02 / PAPERS</span><h2>论文</h2></div><p>按“感知数据—规划算法—端到端系统—仿真验证”阅读。链接直达论文原文页面。</p></div>
+      <div class="library-grid">
+        <a class="library-card" href="https://arxiv.org/abs/1903.11027" target="_blank" rel="noopener noreferrer"><span class="library-kind">感知 · 数据集</span><h3>nuScenes: A multimodal dataset for autonomous driving</h3><p>了解相机、雷达与激光雷达数据如何支持目标检测和跟踪评价。</p><span class="library-meta">Caesar et al. · 2019</span><span class="library-open">阅读论文 ↗</span></a>
+        <a class="library-card" href="https://arxiv.org/abs/1807.08048" target="_blank" rel="noopener noreferrer"><span class="library-kind">决策规划 · Apollo</span><h3>Baidu Apollo EM Motion Planner</h3><p>研究 Frenet 坐标、路径与速度分层优化，以及工程约束的处理。</p><span class="library-meta">Fan et al. · 2018</span><span class="library-open">阅读论文 ↗</span></a>
+        <a class="library-card" href="https://arxiv.org/abs/2212.10156" target="_blank" rel="noopener noreferrer"><span class="library-kind">系统集成 · 前沿</span><h3>Planning-oriented Autonomous Driving</h3><p>UniAD 将感知、预测与规划放在统一框架中，适合进阶比较模块化和端到端方法。</p><span class="library-meta">Hu et al. · 2022</span><span class="library-open">阅读论文 ↗</span></a>
+        <a class="library-card" href="https://arxiv.org/abs/1711.03938" target="_blank" rel="noopener noreferrer"><span class="library-kind">综合验证 · 仿真</span><h3>CARLA: An Open Urban Driving Simulator</h3><p>认识自动驾驶仿真环境及其在算法开发、数据生成和测试中的作用。</p><span class="library-meta">Dosovitskiy et al. · 2017</span><span class="library-open">阅读论文 ↗</span></a>
+      </div>
+    </section>
+    <section class="library-section" id="code">
+      <div class="library-heading"><div><span class="section-index">03 / OPEN SOURCE</span><h2>代码</h2></div><p>先阅读 README、模块目录和许可证，再结合课堂任务选择可运行的示例。</p></div>
+      <div class="library-grid">
+        <a class="library-card" href="https://github.com/ApolloAuto/apollo" target="_blank" rel="noopener noreferrer"><span class="library-kind">完整系统</span><h3>Apollo 开源平台</h3><p>感知、预测、规划、控制与 Cyber RT 等模块的官方代码仓库。</p><span class="library-meta">GitHub · ApolloAuto</span><span class="library-open">打开代码 ↗</span></a>
+        <a class="library-card" href="https://github.com/autowarefoundation/autoware" target="_blank" rel="noopener noreferrer"><span class="library-kind">完整系统</span><h3>Autoware</h3><p>基于 ROS 2 的开源自动驾驶软件栈，适合比较系统架构。</p><span class="library-meta">GitHub · Autoware Foundation</span><span class="library-open">打开代码 ↗</span></a>
+        <a class="library-card" href="https://github.com/carla-simulator/carla" target="_blank" rel="noopener noreferrer"><span class="library-kind">仿真平台</span><h3>CARLA Simulator</h3><p>城市场景仿真、传感器生成与算法闭环测试。</p><span class="library-meta">GitHub · CARLA</span><span class="library-open">打开代码 ↗</span></a>
+        <a class="library-card" href="https://github.com/nutonomy/nuscenes-devkit" target="_blank" rel="noopener noreferrer"><span class="library-kind">数据工具</span><h3>nuScenes Devkit</h3><p>读取多传感器数据、可视化标注并运行评测工具。</p><span class="library-meta">GitHub · nuTonomy</span><span class="library-open">打开代码 ↗</span></a>
+        <a class="library-card" href="https://github.com/waymo-research/waymo-open-dataset" target="_blank" rel="noopener noreferrer"><span class="library-kind">数据工具</span><h3>Waymo Open Dataset</h3><p>感知、运动预测和端到端驾驶数据的格式与评测代码。</p><span class="library-meta">GitHub · Waymo Research</span><span class="library-open">打开代码 ↗</span></a>
+      </div>
+    </section>
+    <section class="library-section" id="videos">
+      <div class="library-heading"><div><span class="section-index">04 / WATCH & LEARN</span><h2>推荐视频</h2></div><p>先按本课程五个模块选择 B 站视频，再跟随 Apollo 官方课程的八个章节逐步深入。</p></div>
+      <h3 class="library-subtitle">与课程模块对应的选集</h3>
+      <div class="video-module-grid">
+        <a class="video-module" href="https://www.bilibili.com/video/BV1iJ41177GE/?p=1" target="_blank" rel="noopener noreferrer"><span>模块 01 / 系统概论</span><strong>自动驾驶行业概述</strong><small>百度 Apollo 公开课 · B 站选集第 1 集</small><b>播放视频 ↗</b></a>
+        <a class="video-module" href="https://www.bilibili.com/video/BV1iJ41177GE/?p=29" target="_blank" rel="noopener noreferrer"><span>模块 02 / 感知与定位</span><strong>感知概貌</strong><small>百度 Apollo 公开课 · B 站选集第 29 集</small><b>播放视频 ↗</b></a>
+        <a class="video-module" href="https://www.bilibili.com/video/BV1iJ41177GE/?p=16" target="_blank" rel="noopener noreferrer"><span>模块 03 / 决策与规划</span><strong>运动规划概览</strong><small>百度 Apollo 公开课 · B 站选集第 16 集</small><b>播放视频 ↗</b></a>
+        <a class="video-module" href="https://www.bilibili.com/video/BV1iJ41177GE/?p=35" target="_blank" rel="noopener noreferrer"><span>模块 04 / 运动控制</span><strong>Control in Apollo</strong><small>百度 Apollo 公开课 · B 站选集第 35 集</small><b>播放视频 ↗</b></a>
+        <a class="video-module" href="https://www.bilibili.com/video/BV1iJ41177GE/?p=44" target="_blank" rel="noopener noreferrer"><span>模块 05 / 综合与安全</span><strong>仿真验证实战</strong><small>百度 Apollo 公开课 · B 站选集第 44 集</small><b>播放视频 ↗</b></a>
+      </div>
+      <div class="apollo-intro"><div><span class="section-index">BAIDU APOLLO × UDACITY</span><h3>自动驾驶技术基础 · 官方课程</h3><p>以下按 Apollo 官网八个章节排列。每张卡片可直达该章首节和一个重点小节；官网可能要求先登录并加入免费课程。</p></div><a href="https://apollo.baidu.com/community/online-course/1" target="_blank" rel="noopener noreferrer">查看完整课程目录 ↗</a></div>
+      <div class="apollo-grid">
+        <article class="apollo-chapter"><span>01 / 11 课时</span><h4>无人驾驶概览</h4><p>从车辆工作方式与 Apollo 架构认识系统全景。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=116" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=118" target="_blank" rel="noopener noreferrer">什么是无人驾驶 ↗</a></div></article>
+        <article class="apollo-chapter"><span>02 / 9 课时</span><h4>高精地图</h4><p>理解地图要素及其与定位、感知、规划的关系。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=141" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=143" target="_blank" rel="noopener noreferrer">高精地图与传统地图 ↗</a></div></article>
+        <article class="apollo-chapter"><span>03 / 11 课时</span><h4>定位</h4><p>学习 GNSS、惯导、激光雷达与视觉定位。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=156" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=172" target="_blank" rel="noopener noreferrer">激光雷达定位 ↗</a></div></article>
+        <article class="apollo-chapter"><span>04 / 17 课时</span><h4>感知</h4><p>涵盖传感器、目标检测、跟踪、分割与融合。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=189" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=237" target="_blank" rel="noopener noreferrer">感知融合策略 ↗</a></div></article>
+        <article class="apollo-chapter"><span>05 / 11 课时</span><h4>预测</h4><p>从障碍物状态与车道意图走向轨迹预测。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=152" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=155" target="_blank" rel="noopener noreferrer">不同的预测方式 ↗</a></div></article>
+        <article class="apollo-chapter"><span>06 / 25 课时</span><h4>规划</h4><p>学习路由、Frenet 坐标、路径与速度规划。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=170" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=191" target="_blank" rel="noopener noreferrer">Frenet 坐标 ↗</a></div></article>
+        <article class="apollo-chapter"><span>07 / 15 课时</span><h4>控制</h4><p>比较 PID、LQR 与模型预测控制的思路。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=207" target="_blank" rel="noopener noreferrer">从首节开始 ↗</a><a href="https://apollo.baidu.com/community/course/outline/1?activeId=217" target="_blank" rel="noopener noreferrer">模型预测控制 ↗</a></div></article>
+        <article class="apollo-chapter"><span>08 / 2 课时</span><h4>结束旅程</h4><p>回顾课程重点，整理后续学习方向。</p><div><a href="https://apollo.baidu.com/community/course/outline/1?activeId=224" target="_blank" rel="noopener noreferrer">进入本章 ↗</a></div></article>
+      </div>
+    </section>
+    <section class="library-section" id="news">
+      <div class="library-heading"><div><span class="section-index">05 / FIELD UPDATES</span><h2>最新资讯</h2></div><p>截至 2026 年 10 月 28 日整理。关注工程进展、仿真技术与安全评估；后续动态可从官方资讯入口继续查看。</p></div>
+      <div class="library-grid">
+        <a class="library-card" href="https://waymo.com/blog/2026/10/waymo-in-madrid-region/" target="_blank" rel="noopener noreferrer"><span class="library-kind">2026.10 · 场景落地</span><h3>Waymo 推进西班牙马德里地区自动驾驶服务</h3><p>关注新城市部署前的道路适应、技术验证与安全准备。</p><span class="library-meta">Waymo 官方博客</span><span class="library-open">阅读资讯 ↗</span></a>
+        <a class="library-card" href="https://waymo.com/blog/2026/06/reference-driver/" target="_blank" rel="noopener noreferrer"><span class="library-kind">2026.06 · 安全评价</span><h3>自动驾驶避撞能力的参考模型</h3><p>Waymo 介绍用于碰撞规避评价的人类驾驶员参考模型。</p><span class="library-meta">Waymo 官方博客</span><span class="library-open">阅读资讯 ↗</span></a>
+        <a class="library-card" href="https://waymo.com/blog/2026/08/10ailessons/" target="_blank" rel="noopener noreferrer"><span class="library-kind">2026.08 · 技术经验</span><h3>从自动驾驶里程中总结 AI 经验</h3><p>观察大规模运营数据如何反馈模型开发与安全监控。</p><span class="library-meta">Waymo 官方博客</span><span class="library-open">阅读资讯 ↗</span></a>
+        <a class="library-card" href="https://apollo.baidu.com/community/competition/70" target="_blank" rel="noopener noreferrer"><span class="library-kind">2026 · 国内实践</span><h3>百度 Apollo 星火自动驾驶大赛</h3><p>了解城市道路场景中的算法开发与仿真评测任务。</p><span class="library-meta">Apollo 开发者社区</span><span class="library-open">查看资讯 ↗</span></a>
+      </div>
+      <div class="news-feeds"><a href="https://auto.tongji.edu.cn/kxyj/zxdt.htm" target="_blank" rel="noopener noreferrer">同济大学汽车与能源学院 · 科研动态 ↗</a><a href="https://apollo.baidu.com/community/article" target="_blank" rel="noopener noreferrer">百度 Apollo · 开发者资讯 ↗</a><a href="https://waymo.com/blog/" target="_blank" rel="noopener noreferrer">Waymo · 官方博客 ↗</a></div>
+    </section>
+    <section class="library-section" id="experts">
+      <div class="library-heading"><div><span class="section-index">06 / PEOPLE & RESEARCH</span><h2>智能驾驶领域专家汇聚</h2></div><p>从课程教师、同济研究团队到国内外学者，点击卡片查看机构发布的个人主页和研究方向。</p></div>
+      <div class="library-grid expert-grid">
+        <a class="library-card expert-card" href="https://auto.tongji.edu.cn/info/1147/9681.htm" target="_blank" rel="noopener noreferrer"><span class="expert-initial">褚</span><span class="library-kind">同济大学 · 课程教师</span><h3>褚洪庆</h3><p>车辆控制与智能化；主讲《智能驾驶基础》《模型预测控制》。</p><span class="library-open">查看教师主页 ↗</span></a>
+        <a class="library-card expert-card" href="https://auto.tongji.edu.cn/info/1153/6446.htm" target="_blank" rel="noopener noreferrer"><span class="expert-initial">熊</span><span class="library-kind">同济大学 · 车辆控制</span><h3>熊璐</h3><p>汽车线控底盘、自动驾驶控制与车辆动力学。</p><span class="library-open">查看教师主页 ↗</span></a>
+        <a class="library-card expert-card" href="https://auto.tongji.edu.cn/info/1146/8712.htm" target="_blank" rel="noopener noreferrer"><span class="expert-initial">黄</span><span class="library-kind">同济大学 · 决策控制</span><h3>黄岩军</h3><p>自动驾驶决策控制、车辆动力学控制与数据闭环。</p><span class="library-open">查看教师主页 ↗</span></a>
+        <a class="library-card expert-card" href="https://www.iail.tsinghua.edu.cn/tdjs/zjtd/8fb58a78ab7d4ca1a1f68abc410bf212.htm" target="_blank" rel="noopener noreferrer"><span class="expert-initial">李</span><span class="library-kind">清华大学 · 智能网联</span><h3>李克强</h3><p>智能网联汽车、车云融合与汽车智能驾驶系统。</p><span class="library-open">查看专家主页 ↗</span></a>
+        <a class="library-card expert-card" href="https://www.cs.toronto.edu/~urtasun/" target="_blank" rel="noopener noreferrer"><span class="expert-initial">RU</span><span class="library-kind">Toronto · 感知与学习</span><h3>Raquel Urtasun</h3><p>机器学习、计算机视觉、机器人与自动驾驶。</p><span class="library-open">查看学者主页 ↗</span></a>
+        <a class="library-card expert-card" href="https://web.stanford.edu/~thrun/" target="_blank" rel="noopener noreferrer"><span class="expert-initial">ST</span><span class="library-kind">Stanford · 自动驾驶先驱</span><h3>Sebastian Thrun</h3><p>概率机器人、自动驾驶与人工智能教育。</p><span class="library-open">查看学者主页 ↗</span></a>
+      </div>
+    </section>
+  </div>
+  <div class="section-page-end"><div class="shell"><a href="index.html">返回课程首页 ↗</a></div></div>
+</main>
+<footer class="site-footer"><div class="shell footer-inner"><div><strong>智能驾驶基础</strong><span>同济大学汽车与能源学院 · 课程学习站</span></div><a href="index.html">课程首页 ↑</a></div></footer>
+<!-- 智能驾驶基础课程 AI 智能体 -->
+<script src="https://agent.tongji.edu.cn/resources/product/llm/public/sdk/embedLite.js"></script>
+<script>
+  new HiagentWebSDK.WebLiteClient({
+    appKey: "dbgts17710990jnp4nag",
+    baseUrl: "https://agent.tongji.edu.cn",
+    variables: {},
+  });
+</script>
+</body>
+</html>
